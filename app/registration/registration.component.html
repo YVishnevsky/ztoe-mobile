@@ -1,0 +1,28 @@
+<ActionBar title="Реєстрація">
+    <ActionItem ios.position="left" (tap)="onCancel()"
+        [visibility]="showCancel">
+        <Label text="Скасувати" color="#3399ff" fontWeight="300"
+            fontSize="15%">
+        </Label>
+    </ActionItem>
+</ActionBar>
+
+<GridLayout>
+    <ScrollView>
+        <StackLayout class="home-panel">
+            <TextField [(ngModel)]="accountingPointName"
+                hint="Особовий рахунок" style="placeholder-color: gray;"
+                fontSize="20%">
+            </TextField>
+
+            <TextField [(ngModel)]="ownerLastName" hint="Прізвище"
+                fontSize="20%" style="placeholder-color: gray;">
+            </TextField>
+            <ActivityIndicator [busy]="isBusy">
+            </ActivityIndicator>
+            <Button text="Продовжити" (tap)="signUp()" fontSize="20%"
+                class="-primary" [isEnabled]="ownerLastName.length > 1 && accountingPointName.length > 7 && !isBusy">
+            </Button>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>

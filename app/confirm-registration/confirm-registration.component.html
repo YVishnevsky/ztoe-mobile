@@ -1,0 +1,11 @@
+<ActionBar class="action-bar">
+</ActionBar>
+<GridLayout>
+    <ScrollView>
+        <StackLayout class="home-panel">
+            <accounting-point-detail [accountingPoint]="newAccountingPoint"></accounting-point-detail>
+            <Button text="Зберегти" (tap)="save()" fontSize="20%" class="-primary">
+            </Button>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>

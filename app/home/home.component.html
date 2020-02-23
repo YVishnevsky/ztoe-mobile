@@ -1,0 +1,10 @@
+<ScrollView>
+    
+        <ListView [items]="accountingPoints">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <accounting-point-detail [accountingPoint]="item"></accounting-point-detail>
+                <!-- <Label [text]="item.name" class="list-group-item"></Label> -->
+            </ng-template>
+        </ListView>
+    
+</ScrollView>
