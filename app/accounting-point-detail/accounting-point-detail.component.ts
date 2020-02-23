@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
 	selector: "accounting-point-detail",
@@ -11,11 +12,13 @@ export class AccountingPointDetailComponent implements OnInit {
 	@Input()
 	accountingPoint: AccountingPoint;
 
-	constructor() {
-		console.log("AccountingPointDetail constructor");
+	constructor(private route: ActivatedRoute,) {
+		
 	}
 
 	ngOnInit(): void {
-		console.log("AccountingPointDetail init");
+		this.route.paramMap.subscribe(params => {
+			console.log(params.get('id'));
+		  });
 	}
 }

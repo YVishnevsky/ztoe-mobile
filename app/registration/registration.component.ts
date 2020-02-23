@@ -22,7 +22,6 @@ export class RegistrationComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.accountingPointName, 'ngOnInit()');
     }
 
     isFormFilled() {

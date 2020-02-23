@@ -18,7 +18,7 @@ export class DataStorageService {
     saveAccountingPoint(accountingPoint: AccountingPoint) {
         remove(accountingPoint.id); //remove
         setString('ztoe_ap_' + accountingPoint.id, JSON.stringify({
-            id: accountingPoint,
+            id: accountingPoint.id,
             name: accountingPoint.name,
             ren: accountingPoint.ren,
             address: accountingPoint.address,

@@ -1,10 +1,11 @@
 <ActionBar title="Реєстрація">
-    <ActionItem ios.position="left" (tap)="onCancel()"
+    <!-- <ActionItem ios.position="left" (tap)="onCancel()"
         [visibility]="showCancel">
         <Label text="Скасувати" color="#3399ff" fontWeight="300"
             fontSize="15%">
         </Label>
-    </ActionItem>
+    </ActionItem> -->
+    <NavigationButton icon="res://home" (tap)="routerExtensions.backToPreviousPage()"></NavigationButton>
 </ActionBar>
 
 <GridLayout>
