@@ -1,0 +1,21 @@
+<ActionBar title="" class="action-bar">
+	<NavigationButton android:icon="font://&#xf060;" class="fas" (tap)="routerExtensions.backToPreviousPage()"
+		marginRight="0" paddingRight="0" fontSize="10">
+	</NavigationButton>
+	<StackLayout orientation="vertical" *ngIf="accountingPoint" horizontalAlignment="center" margin="0 0">
+		<Label text="Передача показів" fontSize="15" android:fontWeight="400" ios:fontWeight="600"
+			horizontalAlignment="center" padding="0 0"></Label>
+		<Label [text]="accountingPoint.address" fontSize="13" fontWeight="400" padding="0 0"
+			horizontalAlignment="center"></Label>
+	</StackLayout>
+</ActionBar>
+<ScrollView class="page">
+	<StackLayout class="home-panel" *ngIf="accountingPoint">
+		<TextField [(ngModel)]="newMeterReadings[i]" *ngFor="let zoneName of zoneNames; index as i" [hint]="zoneName"
+			placeholderColor="gray" fontSize="20" [maxLength]="accountingPoint.digitCapacity" keyboardType="integer">
+		</TextField>
+		<Button text="Выдправити" (tap)="signUp()" fontSize="20%" class="-primary"
+			[isEnabled]="newMeterReadings[0]">
+		</Button>
+	</StackLayout>
+</ScrollView>

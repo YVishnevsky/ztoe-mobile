@@ -1,0 +1,20 @@
+.card
+{
+    background: linear-gradient(to top, rgb(220, 160, 235), rgb(176, 159, 238), rgb(220, 240, 247));
+    /* border-width: 1px;
+    border-top-left-radius: 25;
+    border-top-right-radius: 25;
+    /* border-color: rgb(15, 14, 14); */
+    /* padding: 10 15 0; */
+    font-size:16;
+}
+.title
+{
+    color: rgb(74, 69, 92);
+}
+.meter-readings-header
+{
+    /*font-size:16;
+     padding: 15; */
+    font-weight: 500;
+}

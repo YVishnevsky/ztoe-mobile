@@ -1,0 +1,19 @@
+<ActionBar title="Особові рахунки" class="action-bar">
+    <ActionItem ios.systemIcon="4" ios.position="right" android.systemIcon="ic_input_add"
+        (tap)="routerExtensions.navigate(['/registration'])"></ActionItem>
+</ActionBar>
+<RadListView class="list" #accountingPointListView [items]="accountingPoints" (itemTap)="itemTap($event)" swipeActions="true"
+    (itemSwipeProgressStarted)="onSwipeCellStarted($event)" (itemSwipeProgressChanged)="onCellSwiping($event)">
+    <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+        <StackLayout padding="0">
+            <accounting-point [accountingPoint]="item"></accounting-point>
+            <StackLayout height="1"></StackLayout>
+        </StackLayout>
+    </ng-template>
+    <GridLayout *tkListItemSwipeTemplate columns="*, auto" class="gridLayoutLayout" padding="0 0 1 0">
+        <StackLayout id="delete-view" col="1" (tap)="onDeleteTap($event)" class="deleteViewStackLayout" >
+            <Label text="&#xf2ed;" class="fas" fontSize="48"></Label>
+            <Label text="Видалити" verticalAlignment="center" paddingLeft="0" marginLeft="0"></Label>
+        </StackLayout>
+    </GridLayout>
+</RadListView>
