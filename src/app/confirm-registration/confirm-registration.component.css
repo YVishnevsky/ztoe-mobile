@@ -1,5 +1,11 @@
 .home-panel{
-	vertical-align: top;
-	font-size: 20;
-	margin: 15;
+	vertical-align: center; 
+	font-size: 17;
+	margin:  0 ;
+	padding: 15;
+}
+.page
+{
+	
+	background: linear-gradient(to top, rgb(235, 205, 160), rgb(176, 159, 238), rgb(155, 172, 179) );
 }

@@ -14,8 +14,8 @@ export class RegistrationComponent implements OnInit {
 
     isBusy: boolean = false;
     showCancel: boolean = false;
-    accountingPointName: string = "";
-    ownerLastName: string = "";
+    accountingPointName: string = "06-5-258/101";
+    ownerLastName: string = "Яремчук";
    
     constructor(private httpService: MainHttpService, private regService: NewRegistrationService, private routerExtensions: RouterExtensions) {
 
@@ -33,6 +33,8 @@ export class RegistrationComponent implements OnInit {
         if (this.isFormFilled()) {
             this.isBusy = true;
             this.httpService.register(this.accountingPointName, this.ownerLastName).subscribe(data => {
+                console.log(data.name);
+                
                 this.regService.setData(data);
                 this.isBusy = false;
                 this.routerExtensions.navigate(["/confirm-registration"]);

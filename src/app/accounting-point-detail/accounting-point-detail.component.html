@@ -27,7 +27,7 @@
 		<ListView [items]="accountingPoint.meterReadings">
 			<ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
 				<GridLayout [columns]="headerColumns" , rows="*,*">
-					<Label [text]="item.period | date:'MMM yy': 'uk'" row="0" col="0" margin="0"
+					<Label [text]="item.period | date:'MMM yyр.': 'uk'" row="0" col="0" margin="0"
 						[paddingLeft]="52/zoneNames.length + '%'"></Label>
 					<Label [text]="item.t1Value" row="0" col="1" textAlignment="center" margin="0"></Label>
 					<Label [text]="item.t2Value" row="0" col="2" textAlignment="center" margin="0"

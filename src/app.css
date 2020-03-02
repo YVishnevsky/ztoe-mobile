@@ -21,7 +21,11 @@ The following CSS rule changes the font size of all Buttons that have the
 "-primary" class modifier.
 */
 Button.-primary {
-    font-size: 18;
+    font-size: 20;
+    height: 60;
+    border-radius: 5;
+    margin: 15 0;
+    background-color: papayawhip;
 }
 
 .action-bar

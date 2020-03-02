@@ -1,11 +1,12 @@
 <ActionBar class="action-bar">
 </ActionBar>
-<GridLayout>
-    <ScrollView>
-        <StackLayout class="home-panel">
-            <accounting-point-detail [accountingPoint]="newAccountingPoint"></accounting-point-detail>
-            <Button text="Зберегти" (tap)="save()" fontSize="20%" class="-primary">
-            </Button>
-        </StackLayout>
-    </ScrollView>
-</GridLayout>
+<ScrollView class="page">
+    <StackLayout class="home-panel">
+        <Label [text]="newAccountingPoint.address" class="font-weight-bold"></Label>
+        <Label [text]="newAccountingPoint.owner.fullName"></Label>
+        <Label [text]="newAccountingPoint.ren"></Label>
+        <Label [text]="newAccountingPoint.name"></Label>
+        <Button text="Зберегти" (tap)="save()" class="-primary" backgroundColor="papayawhip">
+        </Button>
+    </StackLayout>
+</ScrollView>
