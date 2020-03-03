@@ -18,7 +18,7 @@
             </TextField>
             <ActivityIndicator [busy]="isBusy">
             </ActivityIndicator>
-            <Button text="Продовжити" (tap)="signUp()" fontSize="20%"
+            <Button text="Продовжити" (tap)="signUp()"
                 class="-primary" [isEnabled]="ownerLastName.length > 1 && accountingPointName.length > 7 && !isBusy">
             </Button>
         </StackLayout>

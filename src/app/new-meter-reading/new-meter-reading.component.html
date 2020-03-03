@@ -14,8 +14,8 @@
 		<TextField [(ngModel)]="newMeterReadings[i]" *ngFor="let zoneName of zoneNames; index as i" [hint]="zoneName"
 			placeholderColor="gray" fontSize="20" [maxLength]="accountingPoint.digitCapacity" keyboardType="integer">
 		</TextField>
-	<!-- 	<Button text="Выдправити" (tap)="signUp()" fontSize="20%" class="-primary"
-			[isEnabled]="newMeterReadings[0]">
-		</Button> -->
+	<Button text="Відправити" (tap)="send()" class="-primary"
+			[isEnabled]="isFormFilled()">
+		</Button> 
 	</StackLayout>
 </ScrollView>

@@ -35,7 +35,7 @@ export class AccountingPointDetailComponent implements OnInit {
 			return res;
 		})).subscribe(ap => {
 			this.storageService.saveAccountingPoint(ap);
-			let currentPeriod = new Date(2020, 1, 28);
+			let currentPeriod = new Date(2020, 1, 28); //todo: !!!!!!!!!
 			let day = currentPeriod.getDate();
 			if (day < 4) {
 				currentPeriod.setTime(currentPeriod.getTime() - (day * 24 * 60 * 60 * 1000));
