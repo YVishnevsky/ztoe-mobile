@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnInit {
                 this.isBusy = false;
                 this.routerExtensions.navigate(["/confirm-registration"]);
             }, (error) => {
-                console.log(error);
+                console.log(error.statusText);
                 this.isBusy = false;
                 let options = {
                     title: "Помилка",

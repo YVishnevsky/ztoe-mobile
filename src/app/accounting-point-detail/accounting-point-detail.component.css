@@ -36,10 +36,6 @@ TabStripItem:active > Image {
     color:rgb(190, 222, 224);
 } 
 
-/* TabStripItem > Label {
-    color:rgb(119, 121, 128);
-} */ 
-
 TabStripItem > Image {
     color:rgb(119, 121, 128);
 }  

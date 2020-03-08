@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { DataStorageService } from "../core/data-storage.service";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { Observable, Subject } from "rxjs";
 import { GetZoneNames } from "../shared/utils";
 import { RouterExtensions } from "nativescript-angular/router";
+import * as flashlight from "nativescript-flashlight";
+import { Vibrate } from 'nativescript-vibrate';
+import { isAndroid } from "tns-core-modules/platform";
 
 @Component({
 	selector: "MeterReading",
@@ -17,8 +19,12 @@ export class NewMeterReadingComponent implements OnInit {
 	date: Date;
 	accountingPoint: AccountingPoint;
 	zoneNames: Array<string>
+	intensity: number = 0;
+	flashlightIsOn: boolean = false;
+	flashlight: any;
 
 	constructor(private storageService: DataStorageService, private route: ActivatedRoute, private routerExtensions: RouterExtensions) {
+		this.flashlight = flashlight;
 	}
 
 	ngOnInit(): void {
@@ -38,8 +44,14 @@ export class NewMeterReadingComponent implements OnInit {
 		return result;
 	}
 
-	send()
-	{
+	flashLightTap() {
+		const v = new Vibrate()
+		if (isAndroid) v.vibrate(30);
+		flashlight.toggle();
+		v.vibrate(15);
+	}
+
+	send() {
 		console.log(this.newMeterReadings);
 		this.routerExtensions.navigate(["/accounting-point-datail", this.accountingPoint.id], { clearHistory: true });
 	}

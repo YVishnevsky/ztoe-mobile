@@ -16,6 +16,10 @@
 		</TextField>
 	<Button text="Відправити" (tap)="send()" class="-primary"
 			[isEnabled]="isFormFilled()">
-		</Button> 
+		</Button>
+		<Label text="&#xf0eb;" [class]="flashlight.isOn() ? 'fas': 'far'" horizontalAlignment="center" fontSize="55" marginTop="40" (tap)="flashLightTap()"
+		[color]="flashlight.isOn() ? 'Khaki': 'gray'">
+		
+		</Label> 
 	</StackLayout>
 </ScrollView>

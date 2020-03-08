@@ -57,7 +57,7 @@ export class AccountingPointDetailComponent implements OnInit {
 			}
 			this.headerColumns += ', auto';
 			this.zoneNames = GetZoneNames(Number(ap.zoneCount))
-		});
+		}, (error) => console.log(error.statusText));
 	}
 
 	newMeterReading(id: string) {
@@ -97,10 +97,5 @@ export class AccountingPointDetailComponent implements OnInit {
 
 	getReference() {
 		this.routerExtensions.navigate(['pdf-view', urls.serverZtoecApi + 'references/' + this.id]);
-	}
-
-	selectedIndexChanged(args) {
-		console.log(Object.getOwnPropertyNames(args));
-
 	}
 }
