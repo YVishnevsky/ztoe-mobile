@@ -14,11 +14,12 @@ export class RegistrationComponent implements OnInit {
 
     isBusy: boolean = false;
     showCancel: boolean = false;
-    accountingPointName: string = "06-5-258/101";
-    ownerLastName: string = "Яремчук";
-   
-    constructor(private httpService: MainHttpService, private regService: NewRegistrationService, private routerExtensions: RouterExtensions) {
+    accountingPointName: string = "06-5-258/96";//"06-5-258/101";
+    ownerLastName: string = "Кисл"//"Яремчук";
+    isFirstRegistration:boolean;
 
+    constructor(private httpService: MainHttpService, private regService: NewRegistrationService, private routerExtensions: RouterExtensions) {
+        this.isFirstRegistration = regService.isFirstRegistration();
     }
 
     ngOnInit(): void {
@@ -29,13 +30,10 @@ export class RegistrationComponent implements OnInit {
     }
 
     signUp() {
-        
         if (this.isFormFilled()) {
             this.isBusy = true;
-            this.httpService.register(this.accountingPointName, this.ownerLastName).subscribe(data => {
-                console.log(data.name);
-                
-                this.regService.setData(data);
+            this.httpService.register(this.accountingPointName, this.ownerLastName).subscribe(ap => {
+                this.regService.setData(ap);
                 this.isBusy = false;
                 this.routerExtensions.navigate(["/confirm-registration"]);
             }, (error) => {
@@ -43,7 +41,7 @@ export class RegistrationComponent implements OnInit {
                 this.isBusy = false;
                 let options = {
                     title: "Помилка",
-                    message: "Не вдалося знайти точку обліку. Перевірте дані та спробуйте знову",
+                    message: "Не вдалося знайти точку обліку. Перевірте дані та спробуйте знову.",
                     okButtonText: "Закрити"
                 };
                 alert(options);

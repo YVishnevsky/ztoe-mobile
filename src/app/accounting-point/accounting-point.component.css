@@ -1,9 +1,13 @@
 .card
 {
-    background: rgb(209, 203, 236);
-    border-bottom-width:1;
-    border-color: rgb(228, 211, 211);
+    /* border-bottom-width:1; */
+    background: rgb(218, 233, 209);
+    /*border-color: rgb(155, 171, 175); */
     font-size:15;
+}
+
+:host-context(.ns-dark) .card {
+    background-color:gray;
 }
 .title
 {

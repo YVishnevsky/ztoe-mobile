@@ -1,47 +1,88 @@
-<ActionBar title="" padding="0 0">
-	<NavigationButton android:icon="font://&#xf104;" class="fas" (tap)="routerExtensions.backToPreviousPage()"
-		marginRight="0" paddingRight="0" fontSize="10">
-	</NavigationButton>
+<ActionBar title="" class="action-bar">
+	<NavigationButton visibility="collapsed"></NavigationButton>
+	<ActionItem (tap)="routerExtensions.navigate(['/'], { clearHistory: true })" ios.position="left"
+		android.position="actionBar">
+		<Label text="&#xf022;" fontSize="20" class="far" color="rgb(190, 222, 224)"></Label>
+	</ActionItem>
 	<StackLayout orientation="vertical" *ngIf="accountingPoint$ | async as accountingPoint" horizontalAlignment="center"
 		margin="0 0">
-		<Label [text]="accountingPoint.address" fontSize="15" android:fontWeight="500" ios:fontWeight="600"
+		<Label [text]="accountingPoint.address" fontSize="15" android:fontWeight="400" ios:fontWeight="600"
 			padding="0 0" horizontalAlignment="center"></Label>
-		<Label [text]="accountingPoint.name" fontSize="12" fontWeight="400" horizontalAlignment="center"
+		<Label [text]="accountingPoint.name" fontSize="13" fontWeight="400" horizontalAlignment="center"
 			padding="0 0"></Label>
 		<android>
-			<Label text="покази лічильника" fontSize="12" fontWeight="400" horizontalAlignment="center" padding="0 0"
-				color="gray"></Label>
+			<Label text="покази лічильника" fontSize="13" fontWeight="400" horizontalAlignment="center" padding="0 0"
+				color="gray" *ngIf="selectedIndex==0; else fin"></Label>
+			<ng-template #fin>
+				<Label text="фінансовий стан" fontSize="13" fontWeight="400" horizontalAlignment="center" padding="0 0"
+					color="gray"></Label>
+			</ng-template>
 		</android>
 	</StackLayout>
 </ActionBar>
 
-<StackLayout *ngIf="accountingPoint$ | async as accountingPoint" class="card">
-	<Button [text]="calcMonth | date: 'Передати покази MMMM'" class="-primary" margin="25 10"
-		*ngIf="calcMonth" (tap)="newMeterReading(accountingPoint.id)"></Button>
-	<GridLayout [columns]="headerColumns" class="meter-readings-header" height="25" marginTop="15">
-		<Label text="Період" row="0" col="0" textAlignment="center"></Label>
-		<Label [text]="zoneName" row="0" [col]="i+1" *ngFor="let zoneName of zoneNames; let i = index"
-			textAlignment="center"></Label>
-	</GridLayout>
-	<ScrollView height="450">
-		<ListView [items]="accountingPoint.meterReadings">
-			<ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
-				<GridLayout [columns]="headerColumns" , rows="*,*">
-					<Label [text]="item.period | date:'MMM yyр.': 'uk'" row="0" col="0" margin="0"
-						[paddingLeft]="52/zoneNames.length + '%'"></Label>
-					<Label [text]="item.t1Value" row="0" col="1" textAlignment="center" margin="0"></Label>
-					<Label [text]="item.t2Value" row="0" col="2" textAlignment="center" margin="0"
-						*ngIf="accountingPoint.zoneCount>1"></Label>
-					<Label [text]="item.t3Value" row="0" col="3" textAlignment="center" margin="0"
-						*ngIf="accountingPoint.zoneCount==3"></Label>
-					<Label [text]="getIconForStatus(item.statusId).icon" [class]="getIconForStatus(item.statusId).class"
-						row="0" [col]="zoneNames.length" textAlignment="right" margin="0"
-						[color]="getIconForStatus(item.statusId).color"></Label>
-					<Label [text]="item.addedDate | date: 'подані d MMM yр.': 'uk'" row="1" col="0"
-						[colSpan]="zoneNames.length+1" fontSize="12" color="rgb(99, 99, 127)"
-						[paddingLeft]="52/zoneNames.length + '%'" padingTop="0" padingBottom="0" margin="0"></Label>
+<BottomNavigation selectedIndex="0" (selectedIndexChanged)="selectedIndex=$event.newIndex">
+	<TabStrip>
+		<TabStripItem paddingTop="10">
+			<Label text="Житомиробленерго" fontSize="11" ></Label>
+			<Image src="font://&#xf784;" class="fas t-36" ></Image>
+		</TabStripItem>
+		<TabStripItem>
+			<Label text="ТОВ «ЖОЕК»" fontSize="11" ></Label>
+			<Image src="font://&#xf570;" class="fas t-36" ></Image>
+		</TabStripItem>
+
+	</TabStrip>
+	<TabContentItem>
+		<GridLayout class="card">
+			<GridLayout *ngIf="accountingPoint$ | async as accountingPoint; else activity" rows="auto,auto,*">
+				<Button [text]="calcMonth | date: 'Передати покази MMMM'" class="-primary" margin="25 10" row="0"
+					col="0" *ngIf="calcMonth" (tap)="newMeterReading(accountingPoint.id)"></Button>
+				<GridLayout [columns]="headerColumns" class="meter-readings-header" height="25" marginTop="0"
+					marginBottom="20" row="1" col="0">
+					<Label text="Період" row="0" col="0" textAlignment="center"></Label>
+					<Label [text]="zoneName" row="0" [col]="i+1" *ngFor="let zoneName of zoneNames; let i = index"
+						textAlignment="center"></Label>
 				</GridLayout>
+				<ListView [items]="accountingPoint.meterReadings" row="2" col="0">
+					<ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+						<GridLayout [columns]="headerColumns" , rows="*,*">
+							<Label [text]="item.period | date:'MMM yyр.': 'uk'" row="0" col="0" margin="0"
+								[paddingLeft]="52/accountingPoint.zoneCount + '%'"></Label>
+							<Label [text]="item.t1Value" row="0" col="1" textAlignment="center" margin="0"></Label>
+							<Label [text]="item.t2Value" row="0" col="2" textAlignment="center" margin="0"
+								*ngIf="accountingPoint.zoneCount>1"></Label>
+							<Label [text]="item.t3Value" row="0" col="3" textAlignment="center" margin="0"
+								*ngIf="accountingPoint.zoneCount==3"></Label>
+							<Label [text]="getIconForStatus(item.statusId).icon"
+								[class]="getIconForStatus(item.statusId).class" row="0" [col]="zoneNames.length"
+								textAlignment="right" margin="0"
+								[color]="getIconForStatus(item.statusId).color"></Label>
+							<Label [text]="item.addedDate | date: 'подані d MMM yр.': 'uk'" row="1" col="0"
+								[colSpan]="zoneNames.length+1" fontSize="12" color="rgb(99, 99, 127)"
+								[paddingLeft]="52/accountingPoint.zoneCount + '%'" padingTop="0" padingBottom="0"
+								margin="0"></Label>
+						</GridLayout>
+					</ng-template>
+				</ListView>
+			</GridLayout>
+			<ng-template #activity>
+				<StackLayout verticalAlignment="center">
+					<ActivityIndicator busy="true" width="100" height="100" color="gray"></ActivityIndicator>
+				</StackLayout>
 			</ng-template>
-		</ListView>
-	</ScrollView>
-</StackLayout>
+		</GridLayout>
+	</TabContentItem>
+	<TabContentItem>
+		<GridLayout>
+			<GridLayout padding="15" rows="auto,auto,auto" *ngIf="accountingPoint$ | async as accountingPoint">
+
+				<Label text="ЖОЕК" class="h2 text-center"></Label>
+				<Button text="Переглянути рахунок" (tap)="getBill()" row="1" class="-primary"></Button>
+				<Button text="Переглянути довідку" row="2" class="-primary" (tap)="getReference()">
+				</Button>
+			</GridLayout>
+		</GridLayout>
+	</TabContentItem>
+
+</BottomNavigation>

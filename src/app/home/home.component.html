@@ -1,6 +1,6 @@
 <ActionBar title="Особові рахунки" class="action-bar">
-    <ActionItem ios.systemIcon="4" ios.position="right" android.systemIcon="ic_input_add"
-        (tap)="routerExtensions.navigate(['/registration'])"></ActionItem>
+    <ActionItem ios.systemIcon="4" ios.position="right" android:icon="res://ic_add_black_24dp"
+        (tap)="goToRegistrationPage()"></ActionItem>
 </ActionBar>
 <RadListView class="list" #accountingPointListView [items]="accountingPoints" (itemTap)="itemTap($event)" swipeActions="true"
     (itemSwipeProgressStarted)="onSwipeCellStarted($event)" (itemSwipeProgressChanged)="onCellSwiping($event)">

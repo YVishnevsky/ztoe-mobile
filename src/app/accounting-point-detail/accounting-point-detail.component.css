@@ -18,3 +18,28 @@
      padding: 15; */
     font-weight: 500;
 }
+
+.t-36
+{
+    font-size:36;
+}
+
+TabStripItem:active {
+    background-color:royalblue;
+}
+
+TabStripItem:active > Label {
+    color:rgb(190, 222, 224);
+} 
+
+TabStripItem:active > Image {
+    color:rgb(190, 222, 224);
+} 
+
+/* TabStripItem > Label {
+    color:rgb(119, 121, 128);
+} */ 
+
+TabStripItem > Image {
+    color:rgb(119, 121, 128);
+}  

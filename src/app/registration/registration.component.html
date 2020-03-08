@@ -1,20 +1,15 @@
-<ActionBar title="Реєстрація">
-    <NavigationButton android:icon="font://&#xf30a;" class="fas" (tap)="goBack()" marginRight="0" paddingRight="0"
-	(tap)="routerExtensions.backToPreviousPage()">
+<ActionBar title="Реєстрація" class="action-bar">
+    <NavigationButton android:icon="res://ic_arrow_back_black_24dp"  marginRight="0" paddingRight="0"
+	(tap)="routerExtensions.backToPreviousPage()" *ngIf="!isFirstRegistration">
     </NavigationButton>
-    <!-- <NavigationButton icon="res://home" (tap)="routerExtensions.backToPreviousPage()"></NavigationButton> -->
 </ActionBar>
 
 <GridLayout>
     <ScrollView>
         <StackLayout class="home-panel">
-            <TextField [(ngModel)]="accountingPointName"
-                hint="Особовий рахунок" style="placeholder-color: gray;"
-                fontSize="20%">
+            <TextField [(ngModel)]="accountingPointName" hint="Особовий рахунок" fontSize="22">
             </TextField>
-
-            <TextField [(ngModel)]="ownerLastName" hint="Прізвище"
-                fontSize="20%" style="placeholder-color: gray;">
+            <TextField [(ngModel)]="ownerLastName" hint="Прізвище"  autocorrect="false" fontSize="22" >
             </TextField>
             <ActivityIndicator [busy]="isBusy">
             </ActivityIndicator>

@@ -1,5 +1,5 @@
 // Add your native dependencies here:
-
+dependencies { compile 'com.github.barteksc:android-pdf-viewer:2.0.3' }
 // Uncomment to add recyclerview-v7 dependency
 //dependencies {
 //	implementation 'com.android.support:recyclerview-v7:+'
@@ -17,4 +17,19 @@ android {
   aaptOptions {
     additionalParameters "--no-version-vectors"
   }
+}
+
+def settingsGradlePath
+
+if(project.hasProperty("appResourcesPath")){
+    settingsGradlePath = "$project.appResourcesPath/Android/settings.gradle";
+} else {
+    settingsGradlePath = "$rootDir/../../app/App_Resources/Android/settings.gradle";
+}
+
+def settingsGradleFile = new File(settingsGradlePath);
+
+if(settingsGradleFile.exists())
+{
+    apply from: settingsGradleFile;
 }

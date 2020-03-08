@@ -41,6 +41,6 @@ export class NewMeterReadingComponent implements OnInit {
 	send()
 	{
 		console.log(this.newMeterReadings);
-		this.routerExtensions.navigate(["/accounting-point-datail", this.accountingPoint.id]);
+		this.routerExtensions.navigate(["/accounting-point-datail", this.accountingPoint.id], { clearHistory: true });
 	}
 }

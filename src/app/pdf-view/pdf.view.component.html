@@ -1,0 +1,9 @@
+<ActionBar [title]="title">
+    <NavigationButton android:icon="res://ic_arrow_back_black_24dp"  marginRight="0" paddingRight="0"
+	(tap)="routerExtensions.backToPreviousPage()">
+    </NavigationButton>
+</ActionBar>
+
+<GridLayout>
+    <PDFView *ngIf="pdfUrl" row="0" col="0" [src]="pdfUrl"></PDFView>
+</GridLayout>

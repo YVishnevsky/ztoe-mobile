@@ -25,19 +25,20 @@ Button.-primary {
     height: 60;
     border-radius: 4;
     margin: 15 0;
-    background-color:papayawhip; /* rgb(213, 217, 255);*/
+    background-color:rgb(105, 151, 204); /* rgb(213, 217, 255);*/
 }
 
 .action-bar
 {
     background-color: royalblue;
-    padding: 0 0;
-    /*: linear-gradient(to top, rgb(215, 235, 160), rgb(176, 159, 238), rgb(220, 240, 247)); */
+    /*: margin-top: 24;
+    linear-gradient(to top, rgb(215, 235, 160), rgb(176, 159, 238), rgb(220, 240, 247)); */
 }
 
-.far {
+ .far {
     font-family: "Font Awesome 5 Free", "fa-regular-400";
-}
+    font-weight: 400;
+} 
 
 .fab {
     font-family: "Font Awesome 5 Brands", "fa-brands-400";
@@ -45,4 +46,9 @@ Button.-primary {
 
 .fas {
     font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-weight: 900;
+}
+
+TextField {
+    placeholder-color:lightgray
 }

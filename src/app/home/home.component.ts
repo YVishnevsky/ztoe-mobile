@@ -19,13 +19,8 @@ import { isAndroid, isIOS } from "tns-core-modules/platform";
 export class HomeComponent implements OnInit {
 
     private accountingPoints: ObservableArray<AccountingPoint>;
-    private leftThresholdPassed = false;
-    private rightThresholdPassed = false;
-    private isIOS: boolean = isIOS;
     private mainView: View;
-    //private leftItem: View;
     private rightItem: View;
-
 
     constructor(private storageService: DataStorageService, private routerExtensions: RouterExtensions) {
 
@@ -38,6 +33,10 @@ export class HomeComponent implements OnInit {
         if (this.accountingPoints.length == 0) {
             this.routerExtensions.navigate(["/registration"], { clearHistory: true });
         }
+    }
+
+    goToRegistrationPage(){
+        this.routerExtensions.navigate(["/registration"], { clearHistory: this.accountingPoints.length == 0 });
     }
 
     itemTap(itemEventData: ItemEventData) {
@@ -54,13 +53,9 @@ export class HomeComponent implements OnInit {
         swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
     }
 
-    public onDeleteTap(args) {
-        console.log("Right swipe click");
-        this.storageService.getAccountingPoints().forEach(a=>
-console.log(a)
-
-        );
-        //this.accountingPoints.splice(this.accountingPoints.indexOf(args.object.bindingContext), 1);
+    public onDeleteTap(args: { object: { bindingContext: AccountingPoint; }; }) {
+        this.storageService.removeAccountingPoint(args.object.bindingContext.id);
+        this.accountingPoints.splice(this.accountingPoints.indexOf(args.object.bindingContext), 1);
     }
 
     public onCellSwiping(args: ListViewEventData) {

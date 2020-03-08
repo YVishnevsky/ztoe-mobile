@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DataStorageService } from "../core/data-storage.service";
 import { GetZoneNames } from "../shared/utils";
+import { urls } from "../shared/url";
 
 @Component({
 	selector: "accounting-point-detail",
@@ -19,6 +20,8 @@ export class AccountingPointDetailComponent implements OnInit {
 	zoneNames: Array<string> = [];
 	accountingPoint$: Observable<AccountingPointDetail>;
 	calcMonth: Date = null;
+	id: string;
+	selectedIndex: number = 0;
 
 	constructor(private route: ActivatedRoute, private storageService: DataStorageService, private routerExtensions: RouterExtensions, private httpService: MainHttpService) {
 
@@ -34,8 +37,9 @@ export class AccountingPointDetailComponent implements OnInit {
 			res.meterReadings.forEach(m => m.period = new Date(m.period.toString()));
 			return res;
 		})).subscribe(ap => {
+			this.id = ap.id;
 			this.storageService.saveAccountingPoint(ap);
-			let currentPeriod = new Date(2020, 1, 28); //todo: !!!!!!!!!
+			let currentPeriod = new Date(2020, 2, 28); //todo: !!!!!!!!! monthes start from 0
 			let day = currentPeriod.getDate();
 			if (day < 4) {
 				currentPeriod.setTime(currentPeriod.getTime() - (day * 24 * 60 * 60 * 1000));
@@ -55,8 +59,9 @@ export class AccountingPointDetailComponent implements OnInit {
 			this.zoneNames = GetZoneNames(Number(ap.zoneCount))
 		});
 	}
-	newMeterReading(id:string) {
-		let meterReadingDate = new Date(this.calcMonth.getFullYear(), this.calcMonth.getMonth()+1, 1);
+
+	newMeterReading(id: string) {
+		let meterReadingDate = new Date(this.calcMonth.getFullYear(), this.calcMonth.getMonth() + 1, 1);
 		this.routerExtensions.navigate([id, "new-meter-reading", meterReadingDate.toISOString()]);
 	}
 
@@ -84,5 +89,18 @@ export class AccountingPointDetailComponent implements OnInit {
 					color: 'red'
 				}
 		}
+	}
+
+	getBill() {
+		this.routerExtensions.navigate(["pdf-view", urls.serverZtoecApi + 'bills/' + this.id]);
+	}
+
+	getReference() {
+		this.routerExtensions.navigate(['pdf-view', urls.serverZtoecApi + 'references/' + this.id]);
+	}
+
+	selectedIndexChanged(args) {
+		console.log(Object.getOwnPropertyNames(args));
+
 	}
 }

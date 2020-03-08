@@ -22,6 +22,7 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptUIGaugeModule } from "nativescript-ui-gauge/angular/gauges-directives"; */
 import { AccountingPointDetailComponent } from "./accounting-point-detail/accounting-point-detail.component";
 import { NewMeterReadingComponent } from "./new-meter-reading/new-meter-reading.component";
+import { PdfViewComponent } from "./pdf-view/pdf.view.component";
 
 registerLocaleData(uk);
 
@@ -51,7 +52,8 @@ registerLocaleData(uk);
         AccountingPointComponent,
         AccountingPointDetailComponent,
         RegistrationComponent,
-        NewMeterReadingComponent
+        NewMeterReadingComponent,
+        PdfViewComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
