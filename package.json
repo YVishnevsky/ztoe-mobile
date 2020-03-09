@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.ztoeapp",
+    "id": "rick.zhytomyr.electricity",
     "tns-android": {
       "version": "6.4.1"
     },
