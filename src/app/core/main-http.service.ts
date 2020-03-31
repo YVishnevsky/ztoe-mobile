@@ -20,7 +20,7 @@ export class MainHttpService {
         return this.http.get<AccountingPointDetail>(urls.serverZtoeApi + id);
     }
 
-    sendMeterReading(id: string) {
-        //return this.http.get<AccountingPointDetail>(this.serverUrl+id);
+    sendMeterReading(id: string, meterReading: CustomerMeterReading) {
+        return this.http.post(urls.serverZtoeApi + id + '/meter-readings', meterReading);
     }
 }

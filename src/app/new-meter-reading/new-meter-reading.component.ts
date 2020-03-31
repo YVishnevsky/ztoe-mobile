@@ -6,6 +6,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import * as flashlight from "nativescript-flashlight";
 import { Vibrate } from 'nativescript-vibrate';
 import { isAndroid } from "tns-core-modules/platform";
+import { MainHttpService } from "../core/main-http.service";
 
 @Component({
 	selector: "MeterReading",
@@ -23,7 +24,7 @@ export class NewMeterReadingComponent implements OnInit {
 	flashlightIsOn: boolean = false;
 	flashlight: any;
 
-	constructor(private storageService: DataStorageService, private route: ActivatedRoute, private routerExtensions: RouterExtensions) {
+	constructor(private httpService: MainHttpService, private storageService: DataStorageService, private route: ActivatedRoute, private routerExtensions: RouterExtensions) {
 		this.flashlight = flashlight;
 	}
 
@@ -52,7 +53,15 @@ export class NewMeterReadingComponent implements OnInit {
 	}
 
 	send() {
-		console.log(this.newMeterReadings);
-		this.routerExtensions.navigate(["/accounting-point-datail", this.accountingPoint.id], { clearHistory: true });
+		const meterReading: CustomerMeterReading = {
+			date: this.date,
+			t1Value: this.newMeterReadings[0],
+			t2Value: this.zoneNames.length > 1 ? this.newMeterReadings[1] : null,
+			t3Value: this.zoneNames.length > 2 ? this.newMeterReadings[2] : null,
+		}
+		console.log(meterReading);
+		this.httpService.sendMeterReading(this.accountingPoint.id, meterReading).subscribe(() => {
+			this.routerExtensions.navigate(["/accounting-point-datail", this.accountingPoint.id], { clearHistory: true });
+		});
 	}
 }

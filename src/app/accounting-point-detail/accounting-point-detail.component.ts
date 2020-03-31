@@ -39,7 +39,7 @@ export class AccountingPointDetailComponent implements OnInit {
 		})).subscribe(ap => {
 			this.id = ap.id;
 			this.storageService.saveAccountingPoint(ap);
-			let currentPeriod = new Date(2020, 2, 28); //todo: !!!!!!!!! monthes start from 0
+			let currentPeriod = new Date(); 
 			let day = currentPeriod.getDate();
 			if (day < 4) {
 				currentPeriod.setTime(currentPeriod.getTime() - (day * 24 * 60 * 60 * 1000));
@@ -62,6 +62,8 @@ export class AccountingPointDetailComponent implements OnInit {
 
 	newMeterReading(id: string) {
 		let meterReadingDate = new Date(this.calcMonth.getFullYear(), this.calcMonth.getMonth() + 1, 1);
+		meterReadingDate.setTime(meterReadingDate.getTime() - (meterReadingDate.getTimezoneOffset() * 60 * 1000));
+		
 		this.routerExtensions.navigate([id, "new-meter-reading", meterReadingDate.toISOString()]);
 	}
 

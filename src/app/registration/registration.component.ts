@@ -14,8 +14,8 @@ export class RegistrationComponent implements OnInit {
 
     isBusy: boolean = false;
     showCancel: boolean = false;
-    accountingPointName: string = "06-5-258/96";//"06-5-258/101";
-    ownerLastName: string = "Кисл"//"Яремчук";
+    accountingPointName: string; // = "06-5-258/96";//"06-5-258/101";
+    ownerLastName: string; // = "Кисл"//"Яремчук";
     isFirstRegistration:boolean;
 
     constructor(private httpService: MainHttpService, private regService: NewRegistrationService, private routerExtensions: RouterExtensions) {
